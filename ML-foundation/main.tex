@@ -1,0 +1,202 @@
+% \documentclass{article}
+\documentclass{book}
+% \documentclass{report}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{indentfirst}
+% add algorithm
+\usepackage{algorithm}  
+\usepackage{algorithmic}
+\usepackage{graphicx}  
+
+%chinese
+\usepackage{xeCJK}
+
+% from denny
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{subfig}
+\usepackage{bbm}
+% for block
+
+\usepackage[dvipsnames,svgnames]{xcolor}
+% \usepackage[usenames, dvipsnames]{color}
+\definecolor{mypink2}{RGB}{219, 48, 122}
+\definecolor{mypink3}{cmyk}{0, 0.7808, 0.4429, 0.1412}
+
+\colorlet{LightRubineRed}{RubineRed!70!}
+\colorlet{Mycolor1}{green!10!orange!90!}
+\definecolor{Mycolor2}{HTML}{00F9DE}
+
+% \pagecolor{black}
+% \color{white}
+% alert 
+\usepackage{environ}
+% \usepackage{xcolor}
+\usepackage[tikz]{bclogo,rotating}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{lipsum}
+\DeclareGraphicsRule{.mps}{eps}{.mps}{}
+
+\usepackage{stmaryrd}
+ 
+\NewEnviron{myremark}[1]
+  {\par\medskip\noindent
+  \begin{tikzpicture}
+    \node[inner sep=0pt] (box) {\parbox[t]{.99\textwidth}{%
+      \begin{minipage}{.3\textwidth}
+      \centering\tikz[scale=5]\node[scale=3,rotate=30]{\bclampe};
+      \end{minipage}%
+      \begin{minipage}{.65\textwidth}
+      \textbf{#1}\par\smallskip
+      \BODY
+      \end{minipage}\hfill}%
+    };
+    \draw[red!75!black,line width=3pt]
+      ( $ (box.north east) + (-5pt,3pt) $ ) -- ( $ (box.north east) + (0,3pt) $ ) -- ( $ (box.south east) + (0,-3pt) $ ) -- + (-5pt,0);
+    \draw[red!75!black,line width=3pt]
+      ( $ (box.north west) + (5pt,3pt) $ ) -- ( $ (box.north west) + (0,3pt) $ ) -- ( $ (box.south west) + (0,-3pt) $ ) -- + (5pt,0);
+  \end{tikzpicture}\par\medskip%
+}
+
+\graphicspath{ {pic/} }
+
+%% XeTeX adds code when switching latin (0) or boundary (255) to CJK (1, 2, 3)
+\XeTeXinterchartokenstate = 1
+
+%% Fonts for Latin and CJK
+\newfontfamily\rmfont{TeX Gyre Pagella}
+\newfontfamily\cjkfont{SimSun}
+
+%% Ranges for Latin Font
+\XeTeXinterchartoks 1 0 = {\rmfont}
+\XeTeXinterchartoks 2 0 = {\rmfont}
+\XeTeXinterchartoks 3 0 = {\rmfont}
+\XeTeXinterchartoks 255 0 = {\rmfont}
+
+%% Ranges for CJK Font
+\XeTeXinterchartoks 0 1 = {\cjkfont}
+\XeTeXinterchartoks 0 2 = {\cjkfont}
+\XeTeXinterchartoks 0 3 = {\cjkfont}
+\XeTeXinterchartoks 255 1 = {\cjkfont}
+\XeTeXinterchartoks 255 2 = {\cjkfont}
+\XeTeXinterchartoks 255 3 = {\cjkfont}
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+%%%%%%%%copy from http://www.latextemplates.com/cat/title-pages
+\newcommand*{\plogo}{\fbox{$\mathbb{ML}$}} % Generic publisher logo
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\rotrt}[1]{\rotatebox{90}{#1}} % Command to rotate right 90 degrees
+\newcommand*{\rotlft}[1]{\rotatebox{-90}{#1}} % Command to rotate left 90 degrees
+
+\newcommand*{\titleBC}{\begingroup % Create the command for including the title page in the document
+\centering % Center all text
+
+\def\CP{\textit{\Huge Machine Learning ~Foundations}} % Title
+
+\settowidth{\unitlength}{\CP} % Set the width of the curly brackets to the width of the title
+{\color{LightGoldenrod}\resizebox*{\unitlength}{\baselineskip}{\rotrt{$\}$}}} \\[\baselineskip] % Print top curly bracket
+\textcolor{Sienna}{\CP} \\[\baselineskip] % Print title
+{\color{RosyBrown}\Large learning and practice} \\ % Tagline or further description
+{\color{LightGoldenrod}\resizebox*{\unitlength}{\baselineskip}{\rotlft{$\}$}}} % Print bottom curly bracket
+
+\vfill % Whitespace between the title and the author name
+
+{\Large\textbf{\textcolor{mypink2}{Zhang xuesen}}}\\ % Author name
+
+\vfill % Whitespace between the author name and the publisher logo
+
+\plogo\\[0.5\baselineskip] % Publisher logo
+2016 % Year published
+
+\endgroup}
+
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\title{Machine Learning Foundations}
+
+\author{Zhang Xuesen}
+%留白
+%http://bbs.pinggu.org/thread-3236036-1-1.html
+\oddsidemargin  0.0in
+\headheight     0.0in
+\topmargin      0.0in
+\evensidemargin 0.0in
+\textheight     9.0in
+\textwidth      6.5in
+
+
+% 目录超链接
+% hyperref 宏包可以生成可连接目录
+% contentsname 变量控制目录名称
+\usepackage[colorlinks]{hyperref}
+\renewcommand{\contentsname}{\centerline{目录}}
+%%% 删除页码 ？ 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,RE]{\leftmark}
+% \fancyhead[LE,RO]{cumtb.iis.ddb}
+\fancyfoot[LO,RE]{}
+\fancyfoot[LE,RO]{-\,\thepage\,-}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+     \fancyhf{}
+     \fancyfoot[LO,RE]{}
+     \fancyfoot[LE,RO]{-\,\thepage\,-}
+     \renewcommand{\headrulewidth}{0pt}
+}
+
+\begin{document}
+% \maketitle
+\titleBC % This command includes the title page
+
+\tableofcontents
+% \chapter{前言}
+\mainmatter
+\pagestyle{empty} % Removes page numbers
+
+% \noindent
+% {\color{RubineRed} \rule{\linewidth}{1mm} }
+\chapter{When Can machines Learn?}
+\include{section-1}
+\include{section-2}
+\include{section-3} 
+\include{section-4}
+\chapter{Why Can machines Learn?}
+\include{section-5}
+\include{section-6}
+\include{section-7}
+\include{section-8}
+\chapter{How Can machines Learn?}
+\include{section-9}
+\include{section-10}
+\include{section-11}
+\include{section-12}
+\chapter{How Can machines Learn Better?}
+\include{section-13}
+\include{section-14}
+\include{section-15}
+\include{section-16}
+
+
+\appendix
+\chapter{附录}
+没有附录。
+\backmatter
+\chapter{后记}
+后记是什么的存在呢？
+
+% \noindent
+% {\color{LightRubineRed} \rule{\linewidth}{1mm} }
+\end{document}
